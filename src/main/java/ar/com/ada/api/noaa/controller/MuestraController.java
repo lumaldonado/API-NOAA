@@ -1,13 +1,17 @@
 package ar.com.ada.api.noaa.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ar.com.ada.api.noaa.entities.Boya;
 import ar.com.ada.api.noaa.entities.Muestra;
 import ar.com.ada.api.noaa.models.request.MuestraNueva;
 import ar.com.ada.api.noaa.models.response.GenericResponse;
@@ -31,7 +35,7 @@ public class MuestraController {
         muestras.setLongitud(muestraNueva.longitud);
         muestras.setMatriculaEmbarcacion(muestraNueva.matriculaEmbarcacion);
 
-        service.crearEmpleada(muestras);
+        service.crearMuestra(muestras);
         respuesta.isOk = true;
         respuesta.id = muestras.getId();
         respuesta.message = "La Muestra fue creada con exito";
@@ -40,18 +44,21 @@ public class MuestraController {
     }
 
     @GetMapping("/muestras/boyas/{idBoya}")
+    public ResponseEntity<List<Muestra>> obtenerMuestrasPorBoyaId(@PathVariable Boya boya){
+        List<Muestra> muestras = service.traerMuestrasPorBoya(); 
+      return ResponseEntity.ok(muestras);
+  
+     }
 
-    @GetMapping("/muestras/colores/{color}")
 
-    @GetMapping("muestras/minima/{idBoya}")
-
+    //rehacer
     @DeleteMapping("/muestras/{id}")
-    ublic ResponseEntity<GenericResponse> eliminarMuestra(@PathVariable Integer id){
-        service.eliminarEmpleadaPorId(id);
+    public ResponseEntity<GenericResponse> eliminarMuestra(@PathVariable Integer id){
+        service.eliminarMuestraPorId(id);
+
         GenericResponse respuesta = new GenericResponse();
         respuesta.isOk = true;
-        respuesta.id = id;
-        respuesta.message = "La empleada fue dada de baja con exito";
+        respuesta.message = "La muestra fue eliminada con exito";
         return ResponseEntity.ok(respuesta);
     
        }
