@@ -1,10 +1,12 @@
 package ar.com.ada.api.noaa.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.com.ada.api.noaa.entities.Boya;
 import ar.com.ada.api.noaa.entities.Muestra;
 import ar.com.ada.api.noaa.repos.MuestraRepository;
 
@@ -13,6 +15,11 @@ public class MuestraService {
 
     @Autowired
     private MuestraRepository repo;
+
+    public List<Muestra> traerMuestrasPorBoya(){
+        Muestra muestra = new Muestra();
+        return repo.findByBoyaId(muestra.getBoya());
+    }
 
     public void crearMuestra(Muestra muestras) {
         repo.save(muestras);
