@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ar.com.ada.api.noaa.entities.Boya;
 import ar.com.ada.api.noaa.entities.Muestra;
+import ar.com.ada.api.noaa.entities.Boya.ColorLuzEnum;
 import ar.com.ada.api.noaa.repos.MuestraRepository;
 
 @Service
@@ -16,28 +17,33 @@ public class MuestraService {
     @Autowired
     private MuestraRepository repo;
 
-    public List<Muestra> traerMuestrasPorBoya(){
-        Muestra muestra = new Muestra();
-        return repo.findByBoyaId(muestra.getBoya());
+    @Autowired
+    BoyaService boyaService;
+
+    public List<Muestra> traerMuestras() {
+        return repo.findAll();
     }
 
     public void crearMuestra(Muestra muestras) {
         repo.save(muestras);
     }
 
-    public Muestra buscarMuestra(Integer id){
+    public Muestra buscarMuestra(Integer id) {
         Optional<Muestra> resultado = repo.findById(id);
-        
-        if(resultado.isPresent())
+
+        if (resultado.isPresent())
             return resultado.get();
-        
-        return null;    
 
-   }
+        return null;
 
-    public void eliminarMuestraPorId(Integer id) {
-        Muestra muestra = this.buscarMuestra(id); 
-       repo.save(muestra);
     }
-    
+
+    public void bajaMuestraPorId(Integer id) {
+        Muestra muestra = repo.findByMuestraId(id);
+        Boya boya = muestra.getBoya();
+        boya.setColorLuz(ColorLuzEnum.AZUL);
+        boyaService.guardar(boya);
+        repo.save(muestra);
+    }
+
 }

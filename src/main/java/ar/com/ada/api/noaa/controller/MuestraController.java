@@ -45,16 +45,16 @@ public class MuestraController {
 
     @GetMapping("/muestras/boyas/{idBoya}")
     public ResponseEntity<List<Muestra>> obtenerMuestrasPorBoyaId(@PathVariable Boya boya){
-        List<Muestra> muestras = service.traerMuestrasPorBoya(); 
+        List<Muestra> muestras = service.traerMuestras(); 
       return ResponseEntity.ok(muestras);
   
      }
 
 
-    //rehacer
+    
     @DeleteMapping("/muestras/{id}")
     public ResponseEntity<GenericResponse> eliminarMuestra(@PathVariable Integer id){
-        service.eliminarMuestraPorId(id);
+        service.bajaMuestraPorId(id);
 
         GenericResponse respuesta = new GenericResponse();
         respuesta.isOk = true;

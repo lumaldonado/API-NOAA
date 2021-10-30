@@ -11,6 +11,7 @@ import ar.com.ada.api.noaa.entities.Muestra;
 @Repository
 public interface MuestraRepository extends JpaRepository<Muestra, Integer> {
 
-    List<Muestra> findByBoyaId(Boya boya);
+
+    Muestra findByMuestraId(Integer id);
     
 }
