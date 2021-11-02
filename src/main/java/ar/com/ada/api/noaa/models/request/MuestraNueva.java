@@ -9,9 +9,9 @@ public class MuestraNueva {
     public Boya boya;
     public Date horarioMuestra;
     public String matriculaEmbarcacion;
-    public Double longitud;
-    public Double latitud;
-    public Double alturaNivelMar;
+    public double longitud;
+    public double latitud;
+    public double alturaNivelMar;
 
     
 }

@@ -1,6 +1,7 @@
 package ar.com.ada.api.noaa.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.ada.api.noaa.entities.Boya;
-import ar.com.ada.api.noaa.models.request.BoyaSinMuestras;
 import ar.com.ada.api.noaa.models.request.ColorNuevoLuz;
+import ar.com.ada.api.noaa.models.request.InfoBoyaNueva;
 import ar.com.ada.api.noaa.models.response.GenericResponse;
 import ar.com.ada.api.noaa.services.BoyaService;
 
@@ -24,12 +25,14 @@ public class BoyaController {
     BoyaService service;
 
     @PostMapping("/boyas")
-    public ResponseEntity<?> crearBoya(@RequestBody Boya boya){
-        service.crearBoya(boya);
+    public ResponseEntity<?> crearBoya(@RequestBody InfoBoyaNueva infoBoya){
+        
 
         GenericResponse respuesta = new GenericResponse();
+
+        Boya boya = service.crearBoya(infoBoya.latitudInstalacion, infoBoya.longitudInstalacion);
         respuesta.isOk = true;
-        respuesta.id = boya.getId();
+        respuesta.id = boya.getBoyaId();
         respuesta.message = "La boya fue creado con exito";
 
         return ResponseEntity.ok(respuesta);
@@ -38,7 +41,7 @@ public class BoyaController {
 
     @GetMapping("/boyas)")
     public ResponseEntity<List<Boya>> getBoyasSinMuestras(){
-        return ResponseEntity.ok(service.traerBoyasSinMuestras());
+        return ResponseEntity.ok(service.traerTodas());
     }
 
     @GetMapping("/boyas/{id}")
@@ -52,7 +55,7 @@ public class BoyaController {
 
 
     @PutMapping("/boyas/{id}")
-    public ResponseEntity<GenericResponse> modificarBoyaId(@PathVariable Integer id, @RequestBody ColorNuevoLuz colorNuevo){
+    public ResponseEntity<GenericResponse> actualizarBoyaId(@PathVariable Integer id, @RequestBody ColorNuevoLuz colorNuevo){
         Boya boya = service.buscarPorId(id);
         boya.setColorLuz(colorNuevo.colorLuz);
         service.guardar(boya);

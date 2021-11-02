@@ -11,7 +11,7 @@ public class Muestra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "muestra_id")
-    private Integer id;
+    private Integer muestraId;
 
     @ManyToOne
     @JoinColumn(name = "boya_id", referencedColumnName = "boya_id")
@@ -23,18 +23,18 @@ public class Muestra {
     @Column(name = "matricula_embarcacion")
     private String matriculaEmbarcacion;
 
-    private Double longitud;
-    private Double latitud;
+    private double longitud;
+    private double latitud;
 
     @Column(name = "altura_al_nivel_del_mar")
-    private Double alturaNivelMar;
+    private double alturaNivelMar;
 
-    public Integer getId() {
-        return id;
+    public Integer getMuestraId() {
+        return muestraId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setMuestraId(Integer muestraId) {
+        this.muestraId = muestraId;
     }
 
     public Boya getBoya() {
@@ -62,27 +62,27 @@ public class Muestra {
         this.matriculaEmbarcacion = matriculaEmbarcacion;
     }
 
-    public Double getLongitud() {
+    public double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(Double longitud) {
+    public void setLongitud(double longitud) {
         this.longitud = longitud;
     }
 
-    public Double getLatitud() {
+    public double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(Double latitud) {
+    public void setLatitud(double latitud) {
         this.latitud = latitud;
     }
 
-    public Double getAlturaNivelMar() {
+    public double getAlturaNivelMar() {
         return alturaNivelMar;
     }
 
-    public void setAlturaNivelMar(Double alturaNivelMar) {
+    public void setAlturaNivelMar(double alturaNivelMar) {
         this.alturaNivelMar = alturaNivelMar;
     }
 

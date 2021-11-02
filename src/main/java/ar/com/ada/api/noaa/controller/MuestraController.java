@@ -37,7 +37,7 @@ public class MuestraController {
 
         service.crearMuestra(muestras);
         respuesta.isOk = true;
-        respuesta.id = muestras.getId();
+        respuesta.id = muestras.getMuestraId();
         respuesta.message = "La Muestra fue creada con exito";
 
         return ResponseEntity.ok(respuesta);

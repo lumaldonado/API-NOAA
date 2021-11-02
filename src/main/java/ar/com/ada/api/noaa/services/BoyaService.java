@@ -7,37 +7,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.ada.api.noaa.entities.Boya;
-import ar.com.ada.api.noaa.models.request.BoyaSinMuestras;
+import ar.com.ada.api.noaa.entities.Boya.ColorLuzEnum;
 import ar.com.ada.api.noaa.repos.BoyaRepository;
 
 @Service
 public class BoyaService {
 
     @Autowired
-    private BoyaRepository repo;
+    BoyaRepository repo;
 
-    public void crearBoya(Boya boya) {
-
-        repo.save(boya);
+    public Boya crearBoya(double longitudInstalacion, double latitudInstalacion) {
+        Boya boya = new Boya();
+        boya.setColorLuz(ColorLuzEnum.VERDE);
+        boya.setLatitudInstalacion(latitudInstalacion);
+        boya.setLongitudInstalacion(longitudInstalacion);
+        return repo.save(boya);
     }
 
-    public List<Boya> traerBoyasSinMuestras() {
-        return repo.findBoyas();
+    public List<Boya> traerTodas() {
+        return repo.findAll();
     }
 
     public Boya buscarPorId(Integer id) {
 
-    Optional<Boya> resultado = repo.findById(id);
-            
-            if(resultado.isPresent())
-                return resultado.get();
-            
-            return null;    
-   
-       }
+        return repo.findByBoyaId(id);
+    }
 
-       public void guardar(Boya boya) {
+    public void guardar(Boya boya) {
         repo.save(boya);
     }
-    
+
 }

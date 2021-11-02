@@ -15,10 +15,10 @@ import ar.com.ada.api.noaa.repos.MuestraRepository;
 public class MuestraService {
 
     @Autowired
-    private MuestraRepository repo;
+    MuestraRepository repo;
 
     @Autowired
-    BoyaService boyaService;
+    BoyaService service;
 
     public List<Muestra> traerMuestras() {
         return repo.findAll();
@@ -42,8 +42,10 @@ public class MuestraService {
         Muestra muestra = repo.findByMuestraId(id);
         Boya boya = muestra.getBoya();
         boya.setColorLuz(ColorLuzEnum.AZUL);
-        boyaService.guardar(boya);
+        service.guardar(boya);
         repo.save(muestra);
     }
+
+    
 
 }

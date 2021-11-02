@@ -4,25 +4,28 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "boya")
 public class Boya {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "boya_id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer boyaId;
 
     @Column(name = "color_luz_id")
     private Integer colorLuz;
 
     @Column(name = "longitud_instalacion")
-    private Double longitudInstalacion;
+    private double longitudInstalacion;
 
     @Column(name = "latitud_instalacion")
-    private Double latitudInstalacion;
+    private double latitudInstalacion;
 
     @OneToMany(mappedBy = "boya", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Muestra> muestras = new ArrayList<>();
 
     public void agregarMuestra(Muestra muestra){
@@ -30,12 +33,12 @@ public class Boya {
         
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getBoyaId() {
+        return boyaId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setBoyaId(Integer boyaId) {
+        this.boyaId = boyaId;
     }
 
     public ColorLuzEnum getColorLuz() {
@@ -46,19 +49,19 @@ public class Boya {
         this.colorLuz = colorLuz.getValue();
     }
 
-    public Double getLongitudInstalacion() {
+    public double getLongitudInstalacion() {
         return longitudInstalacion;
     }
 
-    public void setLongitudInstalacion(Double longitudInstalacion) {
+    public void setLongitudInstalacion(double longitudInstalacion) {
         this.longitudInstalacion = longitudInstalacion;
     }
 
-    public Double getLatitudInstalacion() {
+    public double getLatitudInstalacion() {
         return latitudInstalacion;
     }
 
-    public void setLatitudInstalacion(Double latitudInstalacion) {
+    public void setLatitudInstalacion(double latitudInstalacion) {
         this.latitudInstalacion = latitudInstalacion;
     }
 
