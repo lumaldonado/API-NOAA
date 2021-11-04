@@ -5,6 +5,8 @@ Dichas boyas trasmiten "muestras" constantemente, ademas de poseer un faro de li
 
 Tecnología utilizada: Java Springboot
 
+Deploy usando Heroku:https://noaa-luciana-maldonado.herokuapp.com
+
 Data base: MySQL
 
 ![NOAA](https://user-images.githubusercontent.com/79877306/139926649-b5f68c39-f797-4588-993b-ace5e7be0699.PNG)
