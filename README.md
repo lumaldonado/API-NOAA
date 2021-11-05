@@ -7,6 +7,8 @@ Tecnología utilizada: Java Springboot
 
 Deploy usando Heroku:https://noaa-luciana-maldonado.herokuapp.com
 
+Documentacion en Postman: https://documenter.getpostman.com/view/16267232/UVC2J9Xp
+
 Data base: MySQL
 
 ![NOAA](https://user-images.githubusercontent.com/79877306/139926649-b5f68c39-f797-4588-993b-ace5e7be0699.PNG)
